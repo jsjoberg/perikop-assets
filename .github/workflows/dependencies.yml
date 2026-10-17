@@ -1,0 +1,28 @@
+name: Prepare Perikop CI dependencies
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: The Perikop commit or branch whose pinned upstreams to prepare
+        type: string
+        default: main
+      macos_tools_only:
+        description: Rebuild macOS tools; reuse the pinned native inputs and Linux environment
+        type: boolean
+        default: false
+      reuse_environments:
+        description: Update native inputs; reuse the pinned Linux environment and macOS tools
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: prepare-ci-dependencies
+  cancel-in-progress: false
+jobs:
+  prepare:
+    uses: jsjoberg/perikop/.github/workflows/dependencies.yml@claude/velopack-versions-channels
+    with:
+      ref: ${{ inputs.ref }}
+      macos_tools_only: ${{ inputs.macos_tools_only }}
+      reuse_environments: ${{ inputs.reuse_environments }}
