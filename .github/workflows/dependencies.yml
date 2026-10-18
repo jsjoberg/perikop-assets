@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
-    uses: jsjoberg/perikop/.github/workflows/dependencies.yml@claude/velopack-linux-packages
+    uses: jsjoberg/perikop/.github/workflows/dependencies.yml@main
     with:
       ref: ${{ inputs.ref }}
       macos_tools_only: ${{ inputs.macos_tools_only }}
