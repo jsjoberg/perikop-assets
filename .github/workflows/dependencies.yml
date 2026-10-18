@@ -14,6 +14,10 @@ on:
         description: Update native inputs; reuse the pinned Linux environment and macOS tools
         type: boolean
         default: false
+      linux_environment_only:
+        description: Rebuild the Linux environments; reuse the pinned Windows cross-build environment and macOS tools
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -21,8 +25,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   prepare:
-    uses: jsjoberg/perikop/.github/workflows/dependencies.yml@main
+    uses: jsjoberg/perikop/.github/workflows/dependencies.yml@claude/velopack-linux-packages
     with:
       ref: ${{ inputs.ref }}
       macos_tools_only: ${{ inputs.macos_tools_only }}
       reuse_environments: ${{ inputs.reuse_environments }}
+      linux_environment_only: ${{ inputs.linux_environment_only }}
